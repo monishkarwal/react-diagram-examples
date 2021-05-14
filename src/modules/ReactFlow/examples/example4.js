@@ -4,8 +4,8 @@ import ReactFlow, {
   Handle,
   addEdge,
   removeElements,
-  getBezierPath,
   getMarkerEnd,
+  getSmoothStepPath,
 } from "react-flow-renderer";
 
 const initialElements = [
@@ -39,13 +39,15 @@ const CustomEdge = ({
   arrowHeadType,
   markerEndId,
 }) => {
-  const edgePath = getBezierPath({
+  const edgePath = getSmoothStepPath({
     sourceX,
     sourceY,
     sourcePosition,
     targetX,
     targetY,
     targetPosition,
+    centerX: 400,
+    centerY: 100,
   });
   const markerEnd = getMarkerEnd(arrowHeadType, markerEndId);
 
@@ -56,6 +58,7 @@ const CustomEdge = ({
         style={style}
         className="react-flow__edge-path"
         d={edgePath}
+        // d={`M${sourceX},${sourceY} C ${sourceX} ${targetY} ${sourceX} ${targetY} ${targetX},${targetY}`}
         markerEnd={markerEnd}
       />
       <text>
@@ -75,17 +78,17 @@ const CustomEdge = ({
 const customNode = memo(({ data }) => {
   return (
     <>
-      <Handle
-        type="target"
-        position="left"
-        style={{ background: "#555" }}
-        onConnect={(params) => console.log("handle onConnect", params)}
-      />
       <div>Custom Loop Node</div>
       <Handle
         type="source"
         position="right"
         style={{ top: 10, background: "#555" }}
+      />
+      <Handle
+        type="target"
+        position="left"
+        style={{ background: "#555" }}
+        onConnect={(params) => console.log("handle onConnect", params)}
       />
     </>
   );
