@@ -15,6 +15,15 @@ const initialElements = [
     data: { label: "Input Node" },
     position: { x: 300, y: 25 },
   },
+  {
+    data: { text: "Loop Edge" },
+    id: "reactflow__edge-1null-1null",
+    source: "1",
+    sourceHandle: null,
+    target: "1",
+    targetHandle: null,
+    type: "loopEdge",
+  },
 ];
 
 const CustomEdge = ({
@@ -111,6 +120,7 @@ const ExampleFour = () => {
     data[1].data = { text: "Loop Edge" };
     console.log(data);
     setElements(data);
+
     //setElements((els) => addEdge(params, els));
   };
   // const onDelete = () => {
